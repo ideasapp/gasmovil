@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+  <div data-role="page" id="pageone">
+      <div data-role="panel" id="mypanel">
+          <!-- panel content goes here -->
+      </div><!-- /panel -->
+
+    <div data-role="header">
+      <h1>Header</h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+      <form id="forma">
+        <label for="text-1">Campo1:</label>
+        <input type="text" data-clear-btn="true" name="text-1" id="text-1" value="">
+        <label for="text-3">Campo2:</label>
+        <input type="text" data-clear-btn="true" name="text-3" id="text-3" value="">
+        <input type="button" value="Guardar" id="guardar" name="guardar" data-theme="b" data-role="button">
+      </form>
+      <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars">Default panel</a>
+
+    </div>
+
+    <div data-role="footer">
+      <h1>Footer</h1>
+    </div>
+  </div>
+
+  <!-- dialog #page2  -->
+  <div id="dialog" data-role="page">
+    <div data-role="header">
+      <h1>Transacción</h1>
+    </div>
+    <div data-role="content" id="msg">
+      Se han guardado los datos
+    </div>
+  </div>
+  <script>$("#guardar").click(function () {
+      // console.info("zsdasdasds");
+      var dato;
+      $.mobile.loading( 'show', {
+        text: 'Cargando',
+        textVisible: true,
+        theme: 'z',
+        html: ""
+      });
+      $.getJSON("ejemplo.json", function (data) {
+        //console.info( data);
+        $("#msg").html("");
+        $.each(data, function (i, obj) {
+          //use obj.id and obj.name here, for example:
+          $("#msg").append(obj.name+"<br>");
+        });
+
+        $.mobile.changePage("#dialog", {
+          role: "dialog"  // show #page2 as dialog
+        })
+      });
+
+
+      return false;
+    });</script>
+</body>
+
+</html>
