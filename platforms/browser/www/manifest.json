@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "OperaGAS",
+  "short_name": "OperaGAS",
+  "version": "com.phonegap.helloworld",
+  "description": "Proyecto de gas",
+  "author": "PhoneGap Team",
+  "icons": [],
+  "start_url": "index.html"
+}
