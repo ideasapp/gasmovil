@@ -10,4 +10,4 @@
 
 # "temporary" build files
 /platforms
-/platforms/browser/
+platforms/browser/www/index.html
