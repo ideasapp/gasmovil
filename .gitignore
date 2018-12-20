@@ -9,5 +9,5 @@
 
 
 # "temporary" build files
-/platforms
+#/platforms
 platforms/browser/www/index.html
