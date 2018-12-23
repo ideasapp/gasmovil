@@ -186,8 +186,8 @@ function showRecords() // Function For Retrive data from Database Display record
   
                                              '<a href="#" onclick="deleteRecord(' + item['id'] + ');">delete</a></li>';
   
-                
-                console.info("linkeditdelete:",linkeditdelete);
+                $("#cobeservaciones").html( $("#cobeservaciones").html()+"actializo sql"+i);
+                //console.info("linkeditdelete:",linkeditdelete);
                 //                             $("#results").append(linkeditdelete);
   
              }
@@ -274,5 +274,6 @@ function onError(tx, error) // Function for Hendeling Error...
       return false;
     });</script>
 </body>
+
 
 </html>
