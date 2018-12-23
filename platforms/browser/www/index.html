@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="themes/jquery.mobile.structure-1.4.5.min.css" />
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/jquery.mobile-1.4.5.min.js"></script>
+
 </head>
 
 <body>
@@ -59,16 +60,24 @@
         <label for="cobeservaciones">Observaciones:</label>
         <textarea name="cobeservaciones" id="cobeservaciones">
 
+
+
         </textarea>
 
 
-        
+
       </form>
       <div class="ui-grid-a">
-					<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px"><a href="#" class="ui-btn ui-icon-recycle ui-btn-icon-left ui-shadow ui-corner-all" id="sicronizar" name="sicronizar">Sicronizar</a></div></div>
-          <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><a href="#" class="ui-btn ui-icon-check ui-btn-icon-left ui-shadow ui-corner-all" id="guardar" name="guardar">Guardar</a></div></div>
-         
-				</div>
+        <div class="ui-block-a">
+          <div class="ui-bar ui-bar-a" style="height:60px"><a href="#" class="ui-btn ui-icon-recycle ui-btn-icon-left ui-shadow ui-corner-all"
+              id="sicronizar" name="sicronizar">Sicronizar</a></div>
+        </div>
+        <div class="ui-block-b">
+          <div class="ui-bar ui-bar-a" style="height:60px"><a href="#" class="ui-btn ui-icon-check ui-btn-icon-left ui-shadow ui-corner-all"
+              id="guardar" name="guardar">Guardar</a></div>
+        </div>
+
+      </div>
 
     </div>
 
@@ -87,19 +96,158 @@
     </div>
   </div>
   <script>
-  $("#sicronizar").click(function () {
-     var forma=$("#forma").serialize();
-     console.info("forma:",forma);
-     $("#msg").html(forma);
+    //  Declare SQL Query for SQLite
 
+    var createStatement = "CREATE TABLE IF NOT EXISTS Contacts (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, useremail TEXT)";
 
-        $.mobile.changePage("#dialog", {
-          role: "dialog"  // show #page2 as dialog
-        })
+    var selectAllStatement = "SELECT * FROM Contacts";
 
-  });
+    var insertStatement = "INSERT INTO Contacts (username, useremail) VALUES (?, ?)";
+
+    var updateStatement = "UPDATE Contacts SET username = ?, useremail = ? WHERE id=?";
+
+    var deleteStatement = "DELETE FROM Contacts WHERE id=?";
+
+    var dropStatement = "DROP TABLE Contacts";
+
+    var db = openDatabase("AddressBook", "1.0", "Address Book", 200000);  // Open SQLite Database
+
+    var dataset;
+
+    var DataType;
+
+    function initDatabase()  // Function Call When Page is ready.
+
+    {
+
+      try {
+
+        if (!window.openDatabase)  // Check browser is supported SQLite or not.
+
+        {
+
+          alert('Databases are not supported in this browser.');
+
+        }
+
+        else {
+
+          createTable();  // If supported then call Function for create table in SQLite
+
+        }
+
+      }
+
+      catch (e) {
+
+        if (e == 2) {
+
+          // Version number mismatch. 
+
+          console.log("Invalid database version.");
+
+        } else {
+
+          console.log("Unknown error " + e + ".");
+
+        }
+
+        return;
+
+      }
+
+    }
+
+    function createTable()  // Function for Create Table in SQLite.
+
+    {
+
+      db.transaction(function (tx) { tx.executeSql(createStatement, [], showRecords, onError); });
+
+    }
+
+function showRecords() // Function For Retrive data from Database Display records as list
+ 
+ {
   
-  $("#guardar").click(function () {
+     $("#results").html('')
+  
+     db.transaction(function (tx) {
+  
+         tx.executeSql(selectAllStatement, [], function (tx, result) {
+  
+             dataset = result.rows;
+  
+             for (var i = 0, item = null; i < dataset.length; i++) {
+  
+                 item = dataset.item(i);
+  
+                 var linkeditdelete = '<li>' + item['username'] + ' , ' + item['useremail'] + '    ' + '<a href="#" onclick="loadRecord(' + i + ');">edit</a>' + '    ' +
+  
+                                             '<a href="#" onclick="deleteRecord(' + item['id'] + ');">delete</a></li>';
+  
+                
+                console.info("linkeditdelete:",linkeditdelete);
+                //                             $("#results").append(linkeditdelete);
+  
+             }
+  
+         });
+  
+     });
+  
+ }
+
+  
+function onError(tx, error) // Function for Hendeling Error...
+ 
+ {
+  
+     alert(error.message);
+  
+ }
+
+ function insertRecord() // Get value from Input and insert record . Function Call when Save/Submit Button Click..
+ 
+ {
+  
+         var usernametemp = "jorge";
+  
+         var useremailtemp = "pato@gmail.com";
+         db.transaction(function (tx) { tx.executeSql(insertStatement, [usernametemp, useremailtemp], loadAndReset, onError); });
+  
+         //tx.executeSql(SQL Query Statement,[ Parameters ] , Sucess Result Handler Function, Error Result Handler Function );
+  
+ }
+
+ function loadAndReset() //Function for Load and Reset...
+ 
+ {
+  
+    // resetForm();
+  
+     showRecords()
+  
+ }
+
+    $(document).ready(function () {
+      console.log("ready!");
+      //initDatabase();
+    });
+
+    $("#sicronizar").click(function () {
+      var forma = $("#forma").serialize();
+      console.info("forma:", forma);
+      $("#msg").html(forma);
+
+
+      $.mobile.changePage("#dialog", {
+        role: "dialog"  // show #page2 as dialog
+      })
+
+    });
+
+    $("#guardar").click(function () {
       // console.info("zsdasdasds");
       var dato;
       $.mobile.loading('show', {
@@ -108,17 +256,18 @@
         theme: 'z',
         html: ""
       });
-      $.getJSON("ejemplo.json", function (data) {
-        //console.info( data);
+      $.getJSON("https://ideasapp.000webhostapp.com/gas/usuario.json", function (data) {
+        console.info( data);
         $("#msg").html("");
         $.each(data, function (i, obj) {
           //use obj.id and obj.name here, for example:
-          $("#msg").append(obj.name + "<br>");
+          $("#msg").append(obj + "<br>");
         });
 
         $.mobile.changePage("#dialog", {
           role: "dialog"  // show #page2 as dialog
         })
+        insertRecord();
       });
 
 
