@@ -21,7 +21,8 @@
 
 
     <div data-role="header">
-      <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars ui-btn-icon-notext "></a>
+      <a href="#mypanel"
+        class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars ui-btn-icon-notext "></a>
       <h1>Confirma Pedido</h1>
 
     </div>
@@ -34,6 +35,8 @@
         <input type="text" data-clear-btn="true" name="cdireccion" id="cdireccion" value="">
         <label for="cnombre">Nombre:</label>
         <input type="text" data-clear-btn="true" name="cnombre" id="cnombre" value="">
+        <label for="crfc">RFC:</label>
+        <input type="text" data-clear-btn="true" name="crfc" id="crfc" value="MAAJ830101U41">
         <label for="ctelefono">Telefono:</label>
         <input type="number" data-clear-btn="true" name="ctelefono" id="ctelefono" value="">
         <label for="cimporte">Importe:</label>
@@ -69,12 +72,14 @@
       </form>
       <div class="ui-grid-a">
         <div class="ui-block-a">
-          <div class="ui-bar ui-bar-a" style="height:60px"><a href="#" class="ui-btn ui-icon-recycle ui-btn-icon-left ui-shadow ui-corner-all"
-              id="sicronizar" name="sicronizar">Sicronizar</a></div>
+          <div class="ui-bar ui-bar-a" style="height:60px"><a href="#"
+              class="ui-btn ui-icon-recycle ui-btn-icon-left ui-shadow ui-corner-all" id="sicronizar"
+              name="sicronizar">Sicronizar</a></div>
         </div>
         <div class="ui-block-b">
-          <div class="ui-bar ui-bar-a" style="height:60px"><a href="#" class="ui-btn ui-icon-check ui-btn-icon-left ui-shadow ui-corner-all"
-              id="guardar" name="guardar">Guardar</a></div>
+          <div class="ui-bar ui-bar-a" style="height:60px"><a href="#"
+              class="ui-btn ui-icon-check ui-btn-icon-left ui-shadow ui-corner-all" id="guardar"
+              name="guardar">Guardar</a></div>
         </div>
 
       </div>
@@ -166,69 +171,69 @@
 
     }
 
-function showRecords() // Function For Retrive data from Database Display records as list
- 
- {
-  
-     $("#results").html('')
-  
-     db.transaction(function (tx) {
-  
-         tx.executeSql(selectAllStatement, [], function (tx, result) {
-  
-             dataset = result.rows;
-  
-             for (var i = 0, item = null; i < dataset.length; i++) {
-  
-                 item = dataset.item(i);
-  
-                 var linkeditdelete = '<li>' + item['username'] + ' , ' + item['useremail'] + '    ' + '<a href="#" onclick="loadRecord(' + i + ');">edit</a>' + '    ' +
-  
-                                             '<a href="#" onclick="deleteRecord(' + item['id'] + ');">delete</a></li>';
-  
-                $("#cobeservaciones").html( $("#cobeservaciones").html()+"actializo sql"+i);
-                //console.info("linkeditdelete:",linkeditdelete);
-                //                             $("#results").append(linkeditdelete);
-  
-             }
-  
-         });
-  
-     });
-  
- }
+    function showRecords() // Function For Retrive data from Database Display records as list
 
-  
-function onError(tx, error) // Function for Hendeling Error...
- 
- {
-  
-     alert(error.message);
-  
- }
+    {
 
- function insertRecord() // Get value from Input and insert record . Function Call when Save/Submit Button Click..
- 
- {
-  
-         var usernametemp = "jorge";
-  
-         var useremailtemp = "pato@gmail.com";
-         db.transaction(function (tx) { tx.executeSql(insertStatement, [usernametemp, useremailtemp], loadAndReset, onError); });
-  
-         //tx.executeSql(SQL Query Statement,[ Parameters ] , Sucess Result Handler Function, Error Result Handler Function );
-  
- }
+      $("#results").html('')
 
- function loadAndReset() //Function for Load and Reset...
- 
- {
-  
-    // resetForm();
-  
-     showRecords()
-  
- }
+      db.transaction(function (tx) {
+
+        tx.executeSql(selectAllStatement, [], function (tx, result) {
+
+          dataset = result.rows;
+
+          for (var i = 0, item = null; i < dataset.length; i++) {
+
+            item = dataset.item(i);
+
+            var linkeditdelete = '<li>' + item['username'] + ' , ' + item['useremail'] + '    ' + '<a href="#" onclick="loadRecord(' + i + ');">edit</a>' + '    ' +
+
+              '<a href="#" onclick="deleteRecord(' + item['id'] + ');">delete</a></li>';
+
+            $("#cobeservaciones").html($("#cobeservaciones").html() + "actializo sql" + i);
+            //console.info("linkeditdelete:",linkeditdelete);
+            //                             $("#results").append(linkeditdelete);
+
+          }
+
+        });
+
+      });
+
+    }
+
+
+    function onError(tx, error) // Function for Hendeling Error...
+
+    {
+
+      alert(error.message);
+
+    }
+
+    function insertRecord() // Get value from Input and insert record . Function Call when Save/Submit Button Click..
+
+    {
+
+      var usernametemp = "jorge";
+
+      var useremailtemp = "pato@gmail.com";
+      db.transaction(function (tx) { tx.executeSql(insertStatement, [usernametemp, useremailtemp], loadAndReset, onError); });
+
+      //tx.executeSql(SQL Query Statement,[ Parameters ] , Sucess Result Handler Function, Error Result Handler Function );
+
+    }
+
+    function loadAndReset() //Function for Load and Reset...
+
+    {
+
+      // resetForm();
+
+      showRecords()
+
+    }
 
     $(document).ready(function () {
       console.log("ready!");
@@ -256,7 +261,34 @@ function onError(tx, error) // Function for Hendeling Error...
         theme: 'z',
         html: ""
       });
-      $.getJSON("https://ideasapp.000webhostapp.com/gas/usuario.json", function (data) {
+
+   /*   $("#msg").append("<br>prueba"+$("#forma").serialize() );
+
+      $.mobile.changePage("#dialog", {
+          role: "dialog"  // show #page2 as dialog
+        })*/
+
+
+      $.ajax({
+        url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/ejemplo.php",
+        method:"POST",
+        data: $("#forma").serialize(), success: function (result) {
+          console.info("result:",result);
+          var obj = $.parseJSON(result);
+          $("#msg").append("<br>prueba" +obj.exito);
+
+          $.mobile.changePage("#dialog", {
+            role: "dialog"  // show #page2 as dialog
+          });
+
+
+
+
+        }
+      });
+
+
+      /*$.getJSON("https://ideasapp.000webhostapp.com/gas/usuario.json", function (data) {
         console.info( data);
         $("#msg").html("");
         $.each(data, function (i, obj) {
@@ -268,7 +300,7 @@ function onError(tx, error) // Function for Hendeling Error...
           role: "dialog"  // show #page2 as dialog
         })
         insertRecord();
-      });
+      });*/
 
 
       return false;
