@@ -35,6 +35,10 @@
         <input type="text" data-clear-btn="true" name="cdireccion" id="cdireccion" value="">
         <label for="cnombre">Nombre:</label>
         <input type="text" data-clear-btn="true" name="cnombre" id="cnombre" value="">
+        <label for="cnombre">Apellido Paterno:</label>
+        <input type="text" data-clear-btn="true" name="capaterno" id="capaterno" value="">
+        <label for="cnombre">Apellido Materno:</label>
+        <input type="text" data-clear-btn="true" name="camaterno" id="camaterno" value="">
         <label for="crfc">RFC:</label>
         <input type="text" data-clear-btn="true" name="crfc" id="crfc" value="MAAJ830101U41">
         <label for="ctelefono">Telefono:</label>
@@ -242,7 +246,7 @@
 
     $("#sicronizar").click(function () {
       var forma = $("#forma").serialize();
-      console.info("forma:", forma);
+      //console.info("forma:", forma);
       $("#msg").html(forma);
 
 
@@ -273,9 +277,9 @@
         url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/ejemplo.php",
         method:"POST",
         data: $("#forma").serialize(), success: function (result) {
-          console.info("result:",result);
+          //console.info("result:",result);
           var obj = $.parseJSON(result);
-          $("#msg").append("<br>prueba" +obj.exito);
+          $("#msg").html("Se registro suministro " +obj.exito);
 
           $.mobile.changePage("#dialog", {
             role: "dialog"  // show #page2 as dialog
