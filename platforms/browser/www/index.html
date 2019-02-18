@@ -2,8 +2,8 @@
 <html>
 
 <head>
-  <meta http-equiv='cache-control' content='no-cache'>    
-  <meta http-equiv='expires' content='0'>    
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
   <meta http-equiv='pragma' content='no-cache'>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="themes/gas-rojo.min.css">
@@ -19,9 +19,9 @@
 
   <div data-role="page" id="pageone">
     <div data-role="panel" id="mypanel">
-      
+
       <!-- panel content goes here -->
-      <a id="linkBuscar" href="lista.html" >Buscar</a>
+      <a id="linkBuscar" href="lista.html">Buscar</a>
     </div><!-- /panel -->
 
 
@@ -244,16 +244,16 @@
 
     }
 
-    $("#cambiaVentana").click(function(){
-      $("#linkBuscar").attr("href","lista.html?r="+Math.random() );
+    $("#cambiaVentana").click(function () {
+      $("#linkBuscar").attr("href", "lista.html?r=" + Math.random());
     });
 
 
     $(document).ready(function () {
       console.log("ready!");
-      $("#linkBuscar").attr("href","lista.html?r="+Math.random() );
+      $("#linkBuscar").attr("href", "lista.html?r=" + Math.random());
       initDatabase();
-     
+
     });
 
     $("#sicronizar").click(function () {
@@ -278,20 +278,20 @@
         html: ""
       });
 
-   /*   $("#msg").append("<br>prueba"+$("#forma").serialize() );
-
-      $.mobile.changePage("#dialog", {
-          role: "dialog"  // show #page2 as dialog
-        })*/
+      /*   $("#msg").append("<br>prueba"+$("#forma").serialize() );
+   
+         $.mobile.changePage("#dialog", {
+             role: "dialog"  // show #page2 as dialog
+           })*/
 
 
       $.ajax({
         url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/ejemplo.php",
-        method:"POST",
+        method: "POST",
         data: $("#forma").serialize(), success: function (result) {
           //console.info("result:",result);
           var obj = $.parseJSON(result);
-          $("#msg").html("Se registro suministro " +obj.exito);
+          $("#msg").html("Se registro suministro " + obj.exito);
 
           $.mobile.changePage("#dialog", {
             role: "dialog"  // show #page2 as dialog
@@ -317,7 +317,57 @@
 
 
       return false;
-    });</script>
+    });
+
+
+
+    function buscar() {
+
+      showLoading();
+      var params = $("#crfc").serialize();//+"r:"+Math.random();
+      $.ajax({
+        url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/consulta.php",
+        method: "GET",
+        data: params, success: function (result) {
+          // console.info("result:",result);
+          var rows = $.parseJSON(result);
+
+          $("#lista").html("");
+          $.each(rows, function (i, obj) {
+            var tipopago = obj.idtipopago == "1" ? "EFECTIVO" : "TARJETA";
+            $("#lista").append('<li class="ui-li-static ui-body-inherit">' + tipopago + ' ' + obj.fecha + '</li>');
+          });
+
+        }, complete: function () {
+          hideLoading();
+        }
+      });
+
+    }
+
+    function showLoading() {
+
+      $.mobile.loading('show', {
+        text: 'Cargando',
+        textVisible: true,
+        theme: 'z',
+        html: ""
+      });
+    }
+
+    function hideLoading() {
+
+      $.mobile.loading('hide', {
+        text: 'Cargando',
+        textVisible: true,
+        theme: 'z',
+        html: ""
+      });
+    }
+
+
+
+  </script>
 </body>
 
 
