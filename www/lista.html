@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv='cache-control' content='no-cache'>    
+  <meta http-equiv='expires' content='0'>    
+  <meta http-equiv='pragma' content='no-cache'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="themes/gas-rojo.min.css">
+  <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+  <!--link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"-->
+  <link rel="stylesheet" href="themes/jquery.mobile.structure-1.4.5.min.css" />
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+
+<body>
+
+  <div data-role="page" id="pageone">
+    <div data-role="panel" id="mypanel">
+      <!-- panel content goes here -->
+      <a id="linkRegistro" href="index.html">Registro</a>
+    </div><!-- /panel -->
+
+
+    <div data-role="header">
+      <a href="#mypanel"
+        class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars ui-btn-icon-notext "></a>
+      <h1>Bitacora</h1>
+
+    </div>
+    <div data-role="main" class="ui-content">
+
+      <ul data-role="listview" data-inset="true" data-filter="false" data-filter-placeholder="Buscar por RFC..."
+        id="lista">
+      </ul>
+
+      <label for="cdireccion">RFC:</label>
+      <input type="text" data-clear-btn="true" name="crfc" id="crfc" value="MAAJ830101U41">
+
+      <input type="button" data-icon="search" value="Buscar" id="buscar">
+
+
+    </div>
+
+    <div data-role="footer">
+      <h1>OperaGAS</h1>
+    </div>
+  </div>
+
+  <!-- dialog #page2  -->
+  <div id="dialog" data-role="page">
+    <div data-role="header">
+      <h1>Transacci&oacute;n</h1>
+    </div>
+    <div data-role="content" id="msg">
+      Se han guardado los datos
+    </div>
+  </div>
+  <script>
+
+
+    $(document).ready(function () {
+      console.log("ready!");
+
+
+    });
+
+    function showLoading() {
+
+      $.mobile.loading('show', {
+        text: 'Cargando',
+        textVisible: true,
+        theme: 'z',
+        html: ""
+      });
+    }
+
+    function hideLoading() {
+
+      $.mobile.loading('hide', {
+        text: 'Cargando',
+        textVisible: true,
+        theme: 'z',
+        html: ""
+      });
+    }
+
+    $("#linkRegistro").click(function(){
+      $("#linkRegistro").attr("href","index.html?r="+Math.random() );
+    });
+
+
+    $("#buscar").click(function () {
+
+      showLoading();
+      $.ajax({
+        url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/consulta.php",
+        method:"GET",
+        data: $("#crfc").serialize(), success: function (result) {
+         // console.info("result:",result);
+          var rows = $.parseJSON(result);
+
+          $("#lista").html("");
+          $.each(rows, function(i, obj) {
+           var tipopago=obj.idtipopago=="1"?"EFECTIVO":"TARJETA";
+           $("#lista").append('<li class="ui-li-static ui-body-inherit">'+tipopago+' '+obj.fecha+'</li>');
+          });
+
+        },complete:function(){
+          hideLoading();
+        }
+      });
+
+    });</script>
+</body>
+
+
+</html>
