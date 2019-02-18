@@ -2,9 +2,9 @@
 <html>
 
 <head>
-  <meta http-equiv='cache-control' content='no-cache'>    
+  <!--meta http-equiv='cache-control' content='no-cache'>    
   <meta http-equiv='expires' content='0'>    
-  <meta http-equiv='pragma' content='no-cache'>
+  <meta http-equiv='pragma' content='no-cache'-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="themes/gas-rojo.min.css">
   <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
@@ -26,7 +26,7 @@
 
 
     <div data-role="header">
-      <a href="#mypanel"
+      <a href="#mypanel" id="cambiaVentana"
         class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars ui-btn-icon-notext "></a>
       <h1>Confirma Pedido</h1>
 
@@ -244,13 +244,14 @@
 
     }
 
-    $("#linkBuscar").click(function(){
+    $("#cambiaVentana").click(function(){
       $("#linkBuscar").attr("href","lista.html?r="+Math.random() );
     });
 
 
     $(document).ready(function () {
       console.log("ready!");
+      $("#linkBuscar").attr("href","lista.html?r="+Math.random() );
       initDatabase();
      
     });
