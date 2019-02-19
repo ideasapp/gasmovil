@@ -26,6 +26,9 @@
         <li data-icon="search"><a id="linkBuscar" href="lista.html">Bitacora</a></li>
         <li data-icon="calendar"><a id="linkAgendar" href="agendar.html">Agendar</a></li>
         <li data-icon="grid"><a id="linkReporte" href="reporte.html">Reportes</a></li>
+        <li data-icon="power"><a id="linkCerrar" href="deconec()">Cerrar</a></li>
+        
+
       </ul>
 
 
@@ -209,7 +212,11 @@
       });
     }
 
-
+function deconec()
+ {
+     localStorage.clear(); 
+     navigator.app.exitApp();
+ }
 
   </script>
 </body>
