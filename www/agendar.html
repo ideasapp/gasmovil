@@ -22,7 +22,7 @@
       <!-- panel content goes here -->
       <ul data-role="listview" data-inset="false">
         <li data-icon="edit"><a id="linkRegistro" href="index.html">Registro</a></li>
-        <li data-icon="calendar"><a id="linkAgendar" href="agendar.html">Agendar</a></li>
+        <li data-icon="search"><a id="linkBuscar" href="lista.html">Bitacora</a></li>
         <li data-icon="grid"><a id="linkReporte" href="reporte.html">Reportes</a></li>
       </ul>
     </div><!-- /panel -->
@@ -31,20 +31,29 @@
     <div data-role="header">
       <a href="#mypanel" id="cambiaVentana"
         class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars ui-btn-icon-notext "></a>
-      <h1>Bitacora</h1>
+      <h1>Agendar </h1>
 
     </div>
-    <div class="ui-content">
+    <div data-role="main" class="ui-content">
 
-      <ul data-role="listview" data-inset="true" data-filter="false" data-filter-placeholder="Buscar por RFC..."
-        id="lista">
-      </ul>
+      <form id="formaAgendar">
 
-      <label for="cdireccion">RFC:</label>
-      <input type="text" data-clear-btn="true" name="xcrfc" id="xcrfc" value="MAAJ830101U41">
-
-      <input type="button" data-icon="search" value="Buscar" id="buscar" onclick="buscar()">
-
+        <label for="crfca">RFC:</label>
+        <input type="text" data-clear-btn="true" name="crfca" id="crfca" value="MAAJ830101U41">
+        <label for="ctelefonoa">Telefono:</label>
+        <input type="number" data-clear-btn="true" name="ctelefonoa" id="ctelefono" value="">
+    
+        <label for="cfechaa"> Fecha:</label>
+        <input type="date" name="cfechaa" id="cfechaa" value="">
+        <label for="choraa">Hora:</label>
+        <input type="time" data-clear-btn="false" name="choraa" id="choraa" value="">
+        <label for="cdirecciona">Direccion:</label>
+        <textarea name="cdirecciona" id="cdirecciona">
+        </textarea>
+      </form>
+      <a href="#"
+        class="ui-btn ui-icon-check ui-btn-icon-left ui-shadow ui-corner-all" id="guardara"
+        name="guardara">Guardar</a> 
 
     </div>
 
@@ -53,7 +62,15 @@
     </div>
   </div>
 
-
+  <!-- dialog #page2  -->
+  <div id="dialog2" data-role="page">
+    <div data-role="header">
+      <h1>Transacci&oacute;n</h1>
+    </div>
+    <div data-role="content" id="msg">
+      Se han guardado los datos
+    </div>
+  </div>
 
 </body>
 

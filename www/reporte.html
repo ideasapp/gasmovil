@@ -23,7 +23,7 @@
       <ul data-role="listview" data-inset="false">
         <li data-icon="edit"><a id="linkRegistro" href="index.html">Registro</a></li>
         <li data-icon="calendar"><a id="linkAgendar" href="agendar.html">Agendar</a></li>
-        <li data-icon="grid"><a id="linkReporte" href="reporte.html">Reportes</a></li>
+        <li data-icon="search"><a id="linkBuscar" href="lista.html">Bitacora</a></li>
       </ul>
     </div><!-- /panel -->
 
@@ -31,19 +31,20 @@
     <div data-role="header">
       <a href="#mypanel" id="cambiaVentana"
         class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars ui-btn-icon-notext "></a>
-      <h1>Bitacora</h1>
+      <h1>Reportes</h1>
 
     </div>
-    <div class="ui-content">
+    <div  class="ui-content">
 
-      <ul data-role="listview" data-inset="true" data-filter="false" data-filter-placeholder="Buscar por RFC..."
-        id="lista">
-      </ul>
-
-      <label for="cdireccion">RFC:</label>
-      <input type="text" data-clear-btn="true" name="xcrfc" id="xcrfc" value="MAAJ830101U41">
-
-      <input type="button" data-icon="search" value="Buscar" id="buscar" onclick="buscar()">
+      <ul data-role="listview" data-inset="false">
+        <li><a href="#">Agenda de pedidos por unidad</a></li>
+        <li><a href="#">Bitacora</a></li>
+        <li><a href="#">Venta</a></li>
+        <li><a href="#">Cuentas por cobrar</a></li>
+        <li><a href="#">Gastos</a></li>
+        <li><a href="#">Ingresos</a></li>
+        <li><a href="#">  Metodos de pago</a></li>
+    </ul>
 
 
     </div>
@@ -53,8 +54,23 @@
     </div>
   </div>
 
+  <script>
 
 
+    $(document).ready(function () {
+      console.log("ready!");
+      //$("#buscar").click(); 
+      $("#linkRegistro").attr("href","index.html?r="+Math.random() );
+
+    });
+
+
+
+    $("#cambiaVentana").click(function(){
+      $("#linkRegistro").attr("href","index.html?r="+Math.random() );
+    });
+
+</script>
 </body>
 
 
