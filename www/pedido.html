@@ -21,26 +21,14 @@
     <div data-role="panel" id="mypanel">
 
       <!-- panel content goes here -->
-
-      <ul data-role="listview" data-inset="false">
-        <li data-icon="search"><a id="linkBuscar" href="lista.html">Bitacora</a></li>
-        <li data-icon="calendar"><a id="linkAgendar" href="agendar.html">Agendar</a></li>
-        <li data-icon="grid"><a id="linkReporte" href="reporte.html">Reportes</a></li>
-        <li data-icon="user"><a id="linkCliente" href="cliente.html">Cliente</a></li>
-        <li data-icon="gear"><a id="linkUsuario" href="cliente.html">Usuario</a></li>
-        <li data-icon="power"><a id="linkCerrar" href="index.html">Cerrar</a></li>
-        
-
-      </ul>
-
-
+      <a id="linkBuscar" href="lista.html">Buscar</a>
     </div><!-- /panel -->
 
 
     <div data-role="header">
       <a href="#mypanel" id="cambiaVentana"
         class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars ui-btn-icon-notext "></a>
-      <h1>Regitrar Pedido</h1>
+      <h1>Confirma Pedido</h1>
 
     </div>
 
@@ -83,9 +71,14 @@
         <input type="date" name="cfecha" id="cfecha" value="">
         <label for="cobeservaciones">Observaciones:</label>
         <textarea name="cobeservaciones" id="cobeservaciones">
-        </textarea>
-      </form>
 
+
+
+        </textarea>
+
+
+
+      </form>
       <div class="ui-grid-a">
         <div class="ui-block-a">
           <div class="ui-bar ui-bar-a" style="height:60px"><a href="#"
@@ -125,7 +118,7 @@
     $(document).ready(function () {
       console.log("ready!");
       $("#linkBuscar").attr("href", "lista.html?r=" + Math.random());
-
+     
 
     });
 
@@ -169,30 +162,33 @@
 
       return false;
     });
+
+
+
     function buscar() {
 
-        showLoading();
-        var params = "crfc=" + $("#xcrfc").val();//+"r:"+Math.random();
-        //console.info(params);
-        $.ajax({
-          url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/consulta.php",
-          method: "GET",
-          data: params, success: function (result) {
-            // console.info("result:",result);
-            var rows = $.parseJSON(result);
+      showLoading();
+      var params = "crfc="+$("#xcrfc").val();//+"r:"+Math.random();
+      //console.info(params);
+      $.ajax({
+        url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/consulta.php",
+        method: "GET",
+        data: params, success: function (result) {
+          // console.info("result:",result);
+          var rows = $.parseJSON(result);
 
-            $("#lista").html("");
-            $.each(rows, function (i, obj) {
-              var tipopago = obj.idtipopago == "1" ? "EFECTIVO" : "TARJETA";
-              $("#lista").append('<li class="ui-li-static ui-body-inherit">' + 'Sumnistro:' + obj.idsuministro + ' ' + tipopago + ' ' + obj.fecha + '</li>');
-            });
+          $("#lista").html("");
+          $.each(rows, function (i, obj) {
+            var tipopago = obj.idtipopago == "1" ? "EFECTIVO" : "TARJETA";
+            $("#lista").append('<li class="ui-li-static ui-body-inherit">' + tipopago + ' ' + obj.fecha + '</li>');
+          });
 
-          }, complete: function () {
-            hideLoading();
-          }
-        });
-
+        }, complete: function () {
+          hideLoading();
         }
+      });
+
+    }
 
     function showLoading() {
 
@@ -214,12 +210,7 @@
       });
     }
 
-function deconec()
- {
-     localStorage.clear(); 
-     window.open('','_parent','');
-window.close();
- }
+
 
   </script>
 </body>
