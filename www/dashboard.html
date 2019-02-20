@@ -14,7 +14,7 @@
   <script src="js/jquery.mobile-1.4.5.min.js"></script>
   <style type="text/css">
 body {
-    background: url(imgage.gif);
+   /* background: url(imgage.gif);*/
     background-repeat:repeat-y;
     background-position:center center;
     background-attachment:scroll;
@@ -33,7 +33,7 @@ body {
 
   <div data-role="page" id="pageone">
     <div data-role="header">
-      <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars ui-btn-icon-notext "></a>
+      
       <h1>Bienvenido</h1>
 
     </div>
@@ -41,8 +41,8 @@ body {
     <div data-role="content" class="ui-content">
 
 		<div class="ui-grid-a">
-			<div class="ui-block-a"><a href="login.html" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Regresar</a></div>
-			<div class="ui-block-b"><div class="button-wrap"><a href="insumo.html" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-plus">Registra Pedido</a></div></div>
+			<div class="ui-block-a"><a href="javascript:window.location.href = 'index.html'" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Regresar</a></div>
+			<div class="ui-block-b"><div class="button-wrap"><a href="javascript:window.location.href = 'insumo.html'" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-plus">Registra</a></div></div>
 		</div>
 		<div class="ui-grid-a">
 			<div class="ui-block-a"><a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-search">Buscar</a></div>
@@ -58,54 +58,6 @@ body {
       <h1>OperaGAS</h1>
     </div>
   </div>
-
-  <!-- dialog #page2  -->
-  <div id="dialog" data-role="page">
-    <div data-role="header">
-      <h1>Transacci&oacute;n</h1>
-    </div>
-    <div data-role="content" id="msg">
-      Se han guardado los datos
-    </div>
-  </div>
-  <script>
-  $("#sicronizar").click(function () {
-     var forma=$("#forma").serialize();
-     console.info("forma:",forma);
-     $("#msg").html(forma);
-
-
-        $.mobile.changePage("#dialog", {
-          role: "dialog"  // show #page2 as dialog
-        })
-
-  });
-  
-  $("#guardar").click(function () {
-      // console.info("zsdasdasds");
-      var dato;
-      $.mobile.loading('show', {
-        text: 'Cargando',
-        textVisible: true,
-        theme: 'z',
-        html: ""
-      });
-      $.getJSON("ejemplo.json", function (data) {
-        //console.info( data);
-        $("#msg").html("");
-        $.each(data, function (i, obj) {
-          //use obj.id and obj.name here, for example:
-          $("#msg").append(obj.name + "<br>");
-        });
-
-        $.mobile.changePage("#dialog", {
-          role: "dialog"  // show #page2 as dialog
-        })
-      });
-
-
-      return false;
-    });</script>
 </body>
 
 </html>
