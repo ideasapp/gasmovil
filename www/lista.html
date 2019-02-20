@@ -49,10 +49,9 @@
     </div>
     <div class="ui-content">
 
-      <ul data-role="listview" data-inset="true" data-filter="false" data-filter-placeholder="Buscar por RFC..."
-        id="lista">
+      <ul data-role="listview" data-inset="true" id="lista"  data-filter="true" data-filter-placeholder="Buscar por..." >
       </ul>
-
+      <br>
       <label for="cdireccion">RFC:</label>
       <input type="text" data-clear-btn="true" name="xcrfc" id="xcrfc" value="MAAJ830101U41">
 
@@ -80,12 +79,14 @@
           // console.info("result:",result);
           var rows = $.parseJSON(result);
 
-          $("#lista").html("");
+          var $ul = $("#lista");
+          $ul.empty();
           $.each(rows, function (i, obj) {
             var tipopago = obj.idtipopago == "1" ? "EFECTIVO" : "TARJETA";
-            $("#lista").append('<li class="ui-li-static ui-body-inherit">' + 'Sumnistro:' + obj.idsuministro + ' ' + tipopago + ' ' + obj.fecha + '</li>');
+            var content = '<li data-icon="info"  ><a href="#">' + '(' + obj.idsuministro + ') ' + tipopago + ' ' + obj.fecha + '</a></li>';
+            $ul.append(content);
           });
-
+          $ul.listview( "refresh" );
         }, complete: function () {
           hideLoading();
         }
