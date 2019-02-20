@@ -26,6 +26,8 @@
         <li data-icon="search"><a id="linkBuscar" href="lista.html">Bitacora</a></li>
         <li data-icon="calendar"><a id="linkAgendar" href="agendar.html">Agendar</a></li>
         <li data-icon="grid"><a id="linkReporte" href="reporte.html">Reportes</a></li>
+        <li data-icon="user"><a id="linkCliente" href="cliente.html">Cliente</a></li>
+        <li data-icon="gear"><a id="linkUsuario" href="cliente.html">Usuario</a></li>
         <li data-icon="power"><a id="linkCerrar" href="#" onclick="deconec()">Cerrar</a></li>
         
 
@@ -215,7 +217,8 @@
 function deconec()
  {
      localStorage.clear(); 
-     window.close();
+     window.open('','_parent','');
+window.close();
  }
 
   </script>
