@@ -28,11 +28,12 @@
         </li>
         <li data-icon="calendar"><a id="linkAgendar" href="javascript:window.location.href = 'agendar.html'">Agendar</a>
         </li>
-        <li data-icon="grid"><a id="linkReporte" href="javascript:window.location.href = 'reporte.html'">Reportes</a>
+        <li data-icon="star"><a id="linkReporte" href="javascript:window.location.href = 'reporte.html'">Reportes</a>
         </li>
         <li data-icon="user"><a id="linkCliente" href="javascript:window.location.href = 'cliente.html'">Cliente</a>
         </li>
-        <li data-icon="gear"><a id="linkUsuario" href="javascript:window.location.href = 'cliente.html">Usuario</a></li>
+        <li data-icon="gear"><a id="linkUsuario" href="javascript:window.location.href = 'cliente.html">Usuario</a></li> 
+        <li data-icon="grid"><a id="linkDasboard" href="javascript:window.location.href = 'dashboard.html'">Dasboard</a></li>
         <li data-icon="power"><a id="linkCerrar" href="javascript:window.location.href = 'index.html'">Cerrar</a></li>
       </ul>
 
@@ -50,22 +51,25 @@
 
       <form id="formaAgendar">
 
-        <label for="crfca">RFC:</label>
-        <input type="text" data-clear-btn="true" name="crfca" id="crfca" value="MAAJ830101U41">
-        <label for="ctelefonoa">Telefono:</label>
-        <input type="number" data-clear-btn="true" name="ctelefonoa" id="ctelefono" value="">
+        <label for="crfc">RFC:</label>
+        <input type="text" data-clear-btn="true" name="crfc" id="crfc" value="MAAJ830101U41">
+        <label for="ctelefono">Telefono:</label>
+        <input type="number" data-clear-btn="true" name="ctelefono" id="ctelefono" value="">
     
-        <label for="cfechaa"> Fecha:</label>
-        <input type="date" name="cfechaa" id="cfechaa" value="">
-        <label for="choraa">Hora:</label>
-        <input type="time" data-clear-btn="false" name="choraa" id="choraa" value="">
-        <label for="cdirecciona">Direccion:</label>
-        <textarea name="cdirecciona" id="cdirecciona">
+        <label for="cfecha"> Fecha:</label>
+        <input type="date" name="cfecha" id="cfecha" value="">
+        <label for="chora">Hora:</label>
+        <input type="time" data-clear-btn="false" name="chora" id="chora" value="">
+        <label for="cdireccion">Direccion:</label>
+        <textarea name="cdireccion" id="cdireccion">
         </textarea>
       </form>
-      <a href="#"
-        class="ui-btn ui-icon-check ui-btn-icon-left ui-shadow ui-corner-all" id="guardara"
-        name="guardara">Guardar</a> 
+      <a href="#" onclick="guardarCita()" 
+              class="ui-btn  ui-shadow ui-corner-all" id="guardar"
+              name="guardar">
+              <img src="img/save.png" width="26" height="26" >
+                <br>
+              Guardar</a>
 
     </div>
 
@@ -75,7 +79,7 @@
   </div>
 
   <!-- dialog #page2  -->
-  <div id="dialog2" data-role="page">
+  <div id="dialog" data-role="page">
     <div data-role="header">
       <h1>Transacci&oacute;n</h1>
     </div>
@@ -83,7 +87,51 @@
       Se han guardado los datos
     </div>
   </div>
+<script>
+function guardarCita() {
 
+showLoading();
+$.ajax({
+  url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/agendar.php",
+  method: "POST",
+  data: $("#formaAgendar").serialize(), 
+  success: function (result) {
+    //console.info("result:",result);
+    var obj = $.parseJSON(result);
+    $("#msg").html("Exito se agendo " + obj.exito);
+
+    $.mobile.changePage("#dialog", {
+      role: "dialog"  // show #page2 as dialog
+    });
+
+  }
+});
+
+return false;
+}
+
+    /***************** funciones loading ***********************/
+    function hideLoading() {
+
+$.mobile.loading('hide', {
+  text: 'Cargando',
+  textVisible: true,
+  theme: 'z',
+  html: ""
+});
+}
+function showLoading() {
+
+$.mobile.loading('show', {
+  text: 'Cargando',
+  textVisible: true,
+  theme: 'z',
+  html: ""
+});
+}
+/***********************************************************/
+
+</script>
 </body>
 
 

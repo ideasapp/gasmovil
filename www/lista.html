@@ -44,7 +44,7 @@
     <div data-role="header">
       <a href="#mypanel" id="cambiaVentana"
         class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars ui-btn-icon-notext "></a>
-      <h1>Bitacora</h1>
+      <h1>Buscar</h1>
 
     </div>
     <div class="ui-content">
@@ -84,7 +84,7 @@
           $.each(rows, function (i, obj) {
             console.info("result:",obj);
             var tipopago = obj.idtipopago == "1" ? "EFECTIVO" : "TARJETA";
-            var content = '<li><a href="#"><img src="img/gas.svg" style="padding-top:10px;padding-left:10px;" width="65px"/>' + '(' + obj.idsuministro + ') <br>' + tipopago + ' <br>' + obj.fecha +  ' <br> Importe: $' + number_format(obj.importe,2) +'</a></li>';
+            var content = '<li data-icon="false"><a href="#"><img src="img/gas.svg" style="padding-top:10px;padding-left:10px;" width="65px"/>' + '(' + obj.idsuministro + ') <br>' + tipopago + ' <br>' + obj.fecha +  ' <br> Importe: $' + number_format(obj.importe,2) +'</a></li>';
             $ul.append(content);
           });
           $ul.listview( "refresh" );
