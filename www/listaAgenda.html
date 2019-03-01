@@ -21,7 +21,6 @@
     <div data-role="panel" id="mypanel">
 
       <!-- panel content goes here -->
-
       <ul data-role="listview" data-inset="false">
         <li data-icon="edit"><a id="linkregistrar" href="javascript:window.location.href = 'insumo.html'">Registrar</a>
           </li>
@@ -72,7 +71,7 @@
       var params = "crfc=" + $("#xcrfc").val();//+"r:"+Math.random();
       //console.info(params);
       $.ajax({
-        url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/consulta.php",
+        url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/consultaAgenda.php",
         method: "GET",
         data: params, success: function (result) {
           // console.info("result:",result);
@@ -82,8 +81,8 @@
           $ul.empty();
           $.each(rows, function (i, obj) {
             console.info("result:",obj);
-            var tipopago = obj.idtipopago == "1" ? "EFECTIVO" : "TARJETA";
-            var content = '<li data-icon="false"><a href="#"><img src="img/gas.svg" style="padding-top:10px;padding-left:10px;" width="65px"/>' + '(' + obj.idsuministro + ') <br>' + tipopago + ' <br>' + obj.fecha +  ' <br> Importe: $' + number_format(obj.importe,2) +'</a></li>';
+            //var tipopago = obj.idtipopago == "1" ? "EFECTIVO" : "TARJETA";
+            var content = '<li data-icon="false"><a href="#"><img src="img/calendar.svg" style="padding-top:10px;padding-left:10px;" width="65px"/>' + obj.fecha+'<br>TEL: '+ obj.telefono+'<br>Diección: '+ obj.direccion+'</a></li>';
             $ul.append(content);
           });
           $ul.listview( "refresh" );
