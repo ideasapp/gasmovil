@@ -6,114 +6,147 @@
   <meta http-equiv='expires' content='0'>
   <meta http-equiv='pragma' content='no-cache'>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="themes/gas-rojo.css">
+  <link rel="stylesheet" href="themes/gas-rojo.min.css">
   <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
   <link rel="stylesheet" href="themes/jquery.mobile.structure-1.4.5.min.css" />
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/jquery.mobile-1.4.5.min.js"></script>
-  <style type="text/css">
-    .testheader {
-      text-align: center;
-      height: 96%;
-      /* Center and scale the image nicely */
-      background: transparent url("img/rojo-azul.jpg");
-      background-size: 90% 90%;
-      background-repeat: no-repeat;
-      background-size: cover;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-    }
 
-    .test-footer {
-      position: absolute;
-      top: 94%;
-      right: 0;
-      bottom: 10;
-      left: 0;
-    }
-
-    .test-header {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 10%;
-      left: 0;
-    }
-  </style>
 </head>
 
 <body>
 
   <div data-role="page" id="pageone">
+    <div data-role="panel" id="mypanel">
 
-    <div data-role="content" class="ui-content testheader">
-      <img src="img/logo.png" width="115px" style="margin-top:80px;" />
+      <!-- panel content goes here -->
 
-      <input type="text" data-clear-btn="true" name="cusuario" id="cusuario" value="" data-placeholder="true"
-        placeholder="Usuario">
-      <br /><input type="password" data-clear-btn="true" name="cpassword" id="cpassword" data-placeholder="true"
-        placeholder="Contraseña">
-      <br /><a href="#" class="ui-btn ui-icon-recycle ui-btn-icon-left ui-shadow ui-corner-all" id="entrar"
-        name="entrar">Entrar</a>
+
+      <ul data-role="listview" data-inset="false">
+        <li data-icon="info"><a id="linkCliente" href="javascript:window.location.href = 'cliente.html'">Ayuda</a>
+        </li>
+        <li data-icon="power"><a id="linkCerrar" href="javascript:window.location.href = 'index.html'">Salir</a></li>
+      </ul>
+
+
+    </div><!-- /panel -->
+
+
+    <div data-role="header">
+      <a href="#mypanel" id="cambiaVentana"
+        class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars ui-btn-icon-notext "></a>
+      <h1>Checklist</h1>
+
+    </div>
+
+    <div data-role="main" class="ui-content">
+
+      <form id="forma" >
+
+        <label for="litros">Cantidad de Litros Salida:</label>
+        <input type="range" name="litros" id="litros" value="0" min="0" max="100" data-highlight="true">
+        <!--label for="clitrosregreso">Cantidad de Litros Regreso:</label>
+        <input type="range" name="clitrosregreso" id="clitrosregreso" value="0" min="0" max="100" data-highlight="true" -->
+        <label for="cnombre">Foto Inicial:</label>
+        <input type="file"  name="fotoInicial" id="fotoInicial" >
+        <input type="image"  name="cimage1" id="cimage1" src="img/image-not-found.png" width="100%">
+        <!--label for="cnombre">Foto Final:</label>
+        <input type="file"  name="camaterno" id="camaterno" value="">
+        <input type="image"  name="cimage2" id="cimage2" src="img/image-not-found.png" width="100%"-->
+        <label for="aceite">Nivel de Aceite %</label>
+        <input type="range" name="aceite" id="aceite" value="0" min="0" max="100" data-highlight="true">
+        <label for="anticongelante">Nivel de Anticongelante %</label>
+        <input type="range" name="anticongelante" id="anticongelante" value="0" min="0" max="100" data-highlight="true">
+        <label for="llantas">llantas:</label>
+        <input type="range" name="llantas" id="llantas" value="0" min="0" max="10" data-highlight="true">
+
+        <label for="limpieza">Limpieza</label>
+        <input type="range" name="limpieza" id="limpieza" value="0" min="0" max="10" data-highlight="true">
+        
+        <label for="idUsuario">Usuario</label>
+        <select id="idUsuario" name="idUsuario"><option value="2">JORGE</option><option value="3">JAVIER</option></select>       
+        <label for="reporte">Reporte:</label>
+        <textarea name="reporte" id="reporte">
+        </textarea>
+      </form>
+      <br>
+      <a href="#" onclick="guardar()" 
+              class="ui-btn  ui-shadow ui-corner-all" id="guardar"
+              name="guardar">
+              <img src="img/save.png" width="26" height="26" >
+                <br>
+              Guardar</a>
+      <!-- >div class="ui-grid-a">
+        <div class="ui-block-a">
+          <div class="ui-bar ui-bar-a" style="height:60px"><a href="#" onclick="sicronizar()"
+              class="ui-btn ui-icon-recycle ui-btn-icon-left ui-shadow ui-corner-all" id="sicronizar"
+              name="sicronizar">Sicronizar</a></div>
+        </div>
+        <div class="ui-block-b">
+          <div class="ui-bar ui-bar-a" style="height:60px"><a href="#" onclick="guardar()"
+              class="ui-btn ui-icon-check ui-btn-icon-left ui-shadow ui-corner-all" id="guardar"
+              name="guardar">Guardar</a></div>
+        </div>
+
+      </div-->
+
+    </div>
+
+    <div data-role="footer">
+      <h1>OperaGAS</h1>
     </div>
   </div>
-   <!-- dialog  -->
+
+  <!-- dialog #page2  -->
   <div id="dialog" data-role="page">
     <div data-role="header">
-      <h1>Mensaje</h1>
+      <h1>Transacci&oacute;n</h1>
     </div>
-    <div data-role="content" id="msg">  
+    <div data-role="content" id="msg">
+      Se han guardado los datos
     </div>
   </div>
 
   <script type="text/javascript">
-    $("#entrar").click(function () {
-      var usuario = $("#cusuario").val();
-      var password = $("#cpassword").val();
-      validarDatoUsuarioGuardado(usuario, password);
-    });
 
-    $("#mostrar").click(function () {
-      var usuario = localStorage.getItem("Usuario");
-      var password = localStorage.getItem("Password");
-      alert("los datos son: " + usuario + " con pass: " + password);
-    });
-
-    //Funcion que valida si el usuario ingresado es el que ya se tenia registrado en el localStorage
-    // 0= Datos coninciden con ingresados anteriormente
-    // 1= no hay datos previos a comparar
-    // 2= Los datos ingresados no coiniciden con los almacenados
-    function validarDatoUsuarioGuardado(pusuario, ppassword) {
-      showLoading();
-      $.ajax({
-        url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/acceso.php?usuario=" + pusuario + "&password=" + ppassword,
-        method: "GET",
-        success: function (result) {
-          var obj = $.parseJSON(result);
-
-          if (obj.length > 0) {
-            	$.mobile.changePage("dashboard.html")
-            //window.location.href = "dashboard.html";
-          } else {
-            //alert("Los datos que ingresaste no son correctos");
-            
-            $("#msg").html("Los datos que ingresaste no son correctos");
-            $.mobile.changePage("#dialog", {
-              transition:"slidedown",
-              role: "dialog"  // show #page2 as dialog
+    function guardar() {
+     showLoading();
+        $.ajax({
+              url: "http://www.dratl.com.mx/inmuebles/gas/gasWeb/mvc/view/gas/checklist.php",
+              method: "POST",
+              headers : {
+                  'Cache-Control': 'no-transform'
+              },
+              data: $("#forma").serialize(), 
+              success: function (result) {
+                console.info("result:",result);
+                var obj = $.parseJSON(result);
+                if(obj.exito != 0){
+               // $("#msg").html("Se registro suministro " + obj.exito);	
+                  document.location.href = 'login.html?idChecklist=' + obj.exito;
+                  
+                }else{
+                  $("#msg").html("Error al guardar el checklist, intentelo nuevamente");	
+                }
+              },complete:function(){
+                hideLoading();
+              }
             });
-
-
-          }
-        }, complete: function () {
-          hideLoading();
-        }
-      });
+ 
     }
 
+
+
+
+    function sicronizar() {
+      var forma = $("#forma").serialize();
+      //console.info("forma:", forma);
+      $("#msg").html(forma);
+      $.mobile.changePage("#dialog", {
+        role: "dialog"  // show #page2 as dialog
+      })
+
+    }
     /***************** funciones loading ***********************/
     function hideLoading() {
 
@@ -134,7 +167,85 @@
       });
     }
 /***********************************************************/
+	// Variable to store your files
+	var files;
+
+	// Add events
+	$('input[type=file]').on('change', 
+			function prepareUpload(event){
+	  
+	  		files = event.target.files;
+	  		uploadFiles(event,this.id);
+	 
+	});
+
+
+	// Catch the form submit and upload the files
+/*function uploadFiles(event,idInputFile)
+	{
+	  event.stopPropagation(); // Stop stuff happening
+	    event.preventDefault(); // Totally stop stuff happening
+
+	    // START A LOADING SPINNER HERE
+
+	    // Create a formdata object and add the files
+	    var data = new FormData();
+		//data.append('idProducto',$("#idproducto").val());
+
+
+	    $.each(files, function(key, value)
+	    {
+	        data.append(key, value);
+	    });
+
+		if(idInputFile == 'fotoInicial'){	
+			data.append('idTipoImg',1);
+		}else{
+			data.append('idTipoImg',2);
+		}
+	    
+	    $.ajaxSetup ({ cache: false });	
+	    $.ajax({
+	        url: '<?=$contexto?>/mvc/view/producto/controller/ctrlUpload.php?files',
+	        type: 'POST',
+	        data: data,
+	        cache: false,
+	        dataType: 'json',
+	        processData: false, // Don't process the files
+	        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+		  	 beforeSend: function( xhr ) {
+		  	     //  showloading();
+			  	  },
+	        success: function(data, textStatus, jqXHR)
+	        {
+							        
+	            if( typeof data.error === 'undefined')
+	            {
+	                // Success so call function to process the form
+	               //toastr.success("Exito al subir archivo!");
+	               //reloadTable();
+	            	 
+	            }else{
+	            
+	            	//toastr.error('Error al subir el archivo!');
+	            }
+	            
+	        },
+	        error: function(jqXHR, textStatus, errorThrown)
+	        {
+	            // Handle errors here
+	           // toastr.error('ERRORS: ' + textStatus);
+	            // STOP LOADING SPINNER
+	        },
+		      complete: function() {
+		         // hideloading();
+		          
+		      }
+	    });
+	}*/
+
   </script>
 </body>
+
 
 </html>
