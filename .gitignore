@@ -12,3 +12,6 @@
 /platforms
 platforms/browser/www/index.html
 
+/node_modules
+
+
